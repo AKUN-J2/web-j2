@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Galeri foto perjalanan, kegiatan, dan kenangan kelas XI TKJ 2.">
+    <meta name="theme-color" content="#fbfcfa">
+    <title>Galeri Kenangan | TKJ 2</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar" aria-label="Navigasi utama">
+        <div class="nav-container">
+            <div class="nav-left"><a class="logo" href="index.html"><img class="logo-img" src="tkj2/tkj 2.jpg" alt="Logo Kelas TKJ 2"><span class="logo-text">Kelas TKJ 2</span></a></div>
+            <ul class="nav-links" id="navLinks" aria-label="Menu navigasi">
+                <li class="dropdown"><a href="siswa.html" class="nav-link" data-page="siswa.html" aria-haspopup="true"><i class="fas fa-user-graduate" aria-hidden="true"></i> Siswa <i class="fas fa-chevron-down" aria-hidden="true"></i></a><div class="dropdown-menu" id="studentDropdown"></div></li>
+                <li><a href="wali-kelas.html" class="nav-link" data-page="wali-kelas.html"><i class="fas fa-chalkboard-teacher" aria-hidden="true"></i> Wali Kelas</a></li>
+                <li><a href="struktur.html" class="nav-link" data-page="struktur.html"><i class="fas fa-sitemap" aria-hidden="true"></i> Struktur</a></li>
+                <li><a href="galeri.html" class="nav-link" data-page="galeri.html"><i class="fas fa-images" aria-hidden="true"></i> Galeri</a></li>
+                <li><a href="komentar.html" class="nav-link" data-page="komentar.html"><i class="fas fa-comments" aria-hidden="true"></i> Komentar</a></li>
+            </ul>
+            <div class="nav-right"><div class="live-clock-widget" aria-label="Jam lokal saat ini" role="complementary"><i class="fas fa-clock" aria-hidden="true"></i><span id="liveClockTime">00:00</span></div><div class="theme-switcher" aria-label="Pengalih tema"><button class="theme-btn active" data-theme="default" title="Tema terracotta" aria-label="Pilih tema terracotta"><i class="fas fa-palette" aria-hidden="true"></i></button><button class="theme-btn" data-theme="ocean" title="Tema sage" aria-label="Pilih tema sage"><i class="fas fa-leaf" aria-hidden="true"></i></button></div><button class="mobile-theme-toggle" id="mobileThemeToggle" type="button" aria-label="Aktifkan tema gelap" title="Ganti tema terang atau gelap" aria-pressed="false"><i class="fas fa-moon" aria-hidden="true"></i></button><button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Buka menu navigasi" aria-expanded="false" aria-controls="navLinks"><i class="fas fa-bars" aria-hidden="true"></i></button></div>
+        </div>
+    </nav>
+    <main class="container">
+        <section class="section active" id="gallery">
+            <div class="galeri-container">
+                <a class="back-to-home-btn" href="index.html"><i class="fas fa-arrow-left" aria-hidden="true"></i> Kembali ke Beranda</a>
+                <h1 class="galeri-title"><i class="fas fa-images" aria-hidden="true"></i> Galeri Memori TKJ 2</h1>
+                <div class="gallery-albums" role="group" aria-label="Pilih album foto">
+                    <button type="button" data-gallery-album="class10" aria-pressed="false"><i class="fas fa-camera" aria-hidden="true"></i> Kelas 10</button>
+                    <button type="button" data-gallery-album="class11" aria-pressed="false"><i class="fas fa-book-open" aria-hidden="true"></i> Kelas 11</button>
+                    <button type="button" data-gallery-album="class12" aria-pressed="false"><i class="fas fa-graduation-cap" aria-hidden="true"></i> Kelas 12</button>
+                    <button type="button" data-gallery-album="random" aria-pressed="true"><i class="fas fa-shuffle" aria-hidden="true"></i> Random</button>
+                </div>
+                <div class="gallery-search-row"><label for="gallerySearch" class="visually-hidden">Cari foto</label><input type="search" id="gallerySearch" placeholder="Cari nomor foto..." aria-label="Cari foto berdasarkan nomor"><button id="clearSearchBtn" aria-label="Bersihkan pencarian">Bersihkan</button></div>
+                <div class="galeri-grid" id="galeriGrid"></div>
+            </div>
+            <div id="imageModal" class="modal" role="dialog" aria-label="Tampilan galeri besar" aria-hidden="true">
+                <button class="close-modal" onclick="closeModal()" aria-label="Tutup galeri">×</button>
+                <button class="modal-prev" onclick="changeImage(-1)" aria-label="Gambar sebelumnya">&#10094;</button>
+                <button class="modal-next" onclick="changeImage(1)" aria-label="Gambar berikutnya">&#10095;</button>
+                <div class="modal-loading" id="modalLoading" style="display:none"><i class="fas fa-spinner" aria-hidden="true"></i></div>
+                <img class="modal-content" id="modalImage" alt="Foto galeri TKJ 2">
+                <div class="modal-caption" id="modalCaption"></div>
+            </div>
+        </section>
+    </main>
+    <button id="chatbotBtn" class="chatbot-btn" aria-label="Buka chatbot TKJ 2" aria-expanded="false" aria-controls="chatbotWindow" title="Chat dengan chatbot TKJ 2"><svg class="chatbot-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="10" r="1" fill="currentColor"/><circle cx="12" cy="10" r="1" fill="currentColor"/><circle cx="16" cy="10" r="1" fill="currentColor"/></svg></button>
+    <div id="chatbotWindow" class="chatbot-window" role="dialog" aria-label="Chatbot TKJ 2" aria-hidden="true"><div class="chatbot-header"><h3><i class="fas fa-robot" aria-hidden="true"></i> Chatbot TKJ 2</h3><div class="chatbot-header-btns"><button id="clearChatBtn" title="Hapus riwayat chat" aria-label="Hapus riwayat chat"><i class="fas fa-trash-alt" aria-hidden="true"></i></button><button id="closeChatBtn" aria-label="Tutup chatbot"><i class="fas fa-times" aria-hidden="true"></i></button></div></div><div class="chatbot-messages" id="chatbotMessages" role="log" aria-label="Pesan chatbot"><div class="bot-msg">Halo! Saya RKJ2. Saya menjawab berdasarkan kumpulan respons yang sudah disiapkan, bukan AI online.</div></div><div class="chatbot-input"><label for="chatInput" style="display:none">Pesan chatbot</label><input type="text" id="chatInput" placeholder="Ketik pertanyaan..." aria-label="Ketik pertanyaan untuk chatbot"><button id="sendChatBtn" aria-label="Kirim pesan"><i class="fas fa-paper-plane" aria-hidden="true"></i></button></div></div>
+    <script src="app.js"></script>
+</body>
+</html>

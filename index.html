@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- Responsive viewport untuk tampilan mobile yang nyaman -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Website resmi Kelas XI TKJ 2 - Tempat berbagi kenangan, info siswa, profil guru, dan galeri kegiatan kelas.">
+    <meta name="keywords" content="TKJ2, Kelas TKJ 2, SMK, Teknik Komputer Jaringan, Siswa">
+    <meta name="author" content="Kelas TKJ 2">
+    <meta name="theme-color" content="#022d71">
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Website Kelas TKJ 2">
+    <meta property="og:description" content="Website resmi Kelas XI TKJ 2 - Tempat berbagi kenangan dan informasi kelas.">
+    <meta property="og:site_name" content="TKJ 2 Website">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Website Kelas TKJ 2">
+    <meta name="twitter:description" content="Website resmi Kelas XI TKJ 2">
+    <title>Website Kelas TKJ 2 - Berbagi Kenangan & Informasi Kelas</title>
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar" aria-label="Navigasi utama">
+        <div class="nav-container">
+            <!-- Logo Section -->
+            <div class="nav-left">
+                <a class="logo" href="index.html">
+                    <img class="logo-img" src="tkj2/tkj 2.jpg" alt="Logo Kelas TKJ 2">
+                    <span class="logo-text">Kelas TKJ 2</span>
+                </a>
+            </div>
+
+            <!-- Center - Main Navigation -->
+            <ul class="nav-links" id="navLinks" aria-label="Menu navigasi">
+                <li class="dropdown">
+                    <a href="siswa.html" class="nav-link" data-page="siswa.html" aria-haspopup="true"><i class="fas fa-user-graduate" aria-hidden="true"></i> Siswa <i
+                            class="fas fa-chevron-down" style="margin-left: 5px; font-size: 0.8rem;" aria-hidden="true"></i></a>
+                    <div class="dropdown-menu" id="studentDropdown"></div>
+                </li>
+
+
+                <li><a href="wali-kelas.html" class="nav-link" data-page="wali-kelas.html"><i class="fas fa-chalkboard-teacher" aria-hidden="true"></i>
+                        Wali Kelas</a></li>
+                <li><a href="struktur.html" class="nav-link" data-page="struktur.html"><i class="fas fa-sitemap" aria-hidden="true"></i> Struktur</a></li>
+                <li><a href="galeri.html" class="nav-link" data-page="galeri.html"><i class="fas fa-images" aria-hidden="true"></i> Galeri</a></li>
+                <li><a href="komentar.html" class="nav-link" data-page="komentar.html"><i class="fas fa-comments" aria-hidden="true"></i> Komentar</a>
+                </li>
+            </ul>
+
+            <!-- Right - Widgets & Tools -->
+            <div class="nav-right">
+                <!-- Clock Widget (Desktop) -->
+                <div class="live-clock-widget" aria-label="Jam lokal saat ini" role="complementary">
+                    <i class="fas fa-clock" aria-hidden="true"></i>
+                    <span id="liveClockTime">00:00</span>
+                </div>                
+                <!-- Theme Switcher -->
+                <div class="theme-switcher" aria-label="Pengalih tema">
+                    <button class="theme-btn active" data-theme="default" title="Tema Default" aria-label="Pilih tema default">
+                        <i class="fas fa-palette" aria-hidden="true"></i>
+                    </button>
+                    <button class="theme-btn" data-theme="ocean" title="Tema Laut Biru" aria-label="Pilih tema laut biru">
+                        <i class="fas fa-water" aria-hidden="true"></i>
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button class="mobile-theme-toggle" id="mobileThemeToggle" type="button" aria-label="Aktifkan tema gelap" title="Ganti tema terang atau gelap" aria-pressed="false">
+                    <i class="fas fa-moon" aria-hidden="true"></i>
+                </button>
+                <button class="mobile-menu-btn" id="mobileMenuBtn" title="Menu" aria-label="Buka menu navigasi" aria-expanded="false" aria-controls="navLinks">
+                    <i class="fas fa-bars" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Home Section -->
+        <section class="section active" id="home">
+            <header class="memory-intro">
+                <p class="memory-kicker">ARSIP KENANGAN · KELAS XI TKJ 2</p>
+                <h1>Semua cerita kita, tersimpan di sini.</h1>
+                <p class="memory-intro-copy">Sebuah album digital untuk mengingat perjalanan TKJ 2: kebersamaan di kelas, kegiatan sekolah, dan teman-teman yang membuat setiap harinya berarti.</p>
+            </header>
+
+            <figure class="memory-feature">
+                <img src="gambar/2.jpeg" alt="Siswa TKJ 2 berfoto bersama di halaman sekolah" fetchpriority="high">
+                <figcaption>
+                    <span>Satu bingkai, banyak cerita.</span>
+                    <a class="memory-gallery-link" href="galeri.html">Jelajahi galeri <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                </figcaption>
+            </figure>
+
+            <h2 class="memory-section-title">Tentang kelas</h2>
+            <div class="class-info memory-facts">
+                <div class="info-item">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h3>Kelas TKJ 2</h3>
+                    <p>Tahun 2024-2027</p>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-users"></i>
+                    <h3>40 Siswa</h3>
+                    <p>27 Laki-laki, 13 Perempuan</p>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    <h3>Wali Kelas Saat ini</h3>
+                    <p>BU ERIN</p>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h3>Lab. Komputer 1</h3>
+                    <p> Lantai 2</p>
+                </div>
+            </div>
+
+            <h2 class="memory-section-title">Jelajahi cerita</h2>
+            <div class="quick-actions">
+                <a class="action-card" href="siswa.html">
+                    <i class="fas fa-users"></i>
+                    <h3>Semua Siswa</h3>
+                    <p>data 40 siswa kelas</p>
+                </a>
+                <a class="action-card" href="wali-kelas.html">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    <h3>Wali Kelas</h3>
+                    <p>Profil wali kelas</p>
+                </a>
+                <a class="action-card" href="struktur.html">
+                    <i class="fas fa-sitemap"></i>
+                    <h3>Struktur Kelas</h3>
+                    <p>Struktur kelas TKJ 2</p>
+                </a>
+                <a class="action-card" href="galeri.html">
+                    <i class="fas fa-images"></i>
+                    <h3>Galeri</h3>
+                    <p>Foto perjalanan TKJ 2</p>
+                </a>
+            </div>
+
+            <section class="memory-social" aria-labelledby="memorySocialTitle">
+                <h2 id="memorySocialTitle" class="memory-section-title">Tetap terhubung</h2>
+                <div class="social-links">
+                    <a href="https://www.tiktok.com/@miracle_class2?_r=1&_t=ZS-95MPaFN3cpN" target="_blank" rel="noopener noreferrer"
+                        class="social-btn tiktok" aria-label="Kunjungi TikTok Kelas TKJ 2">
+                        <i class="fab fa-tiktok" aria-hidden="true"></i> TikTok
+                    </a>
+                    <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer"
+                        class="social-btn youtube" aria-label="Kunjungi YouTube Kelas TKJ 2">
+                        <i class="fab fa-youtube" aria-hidden="true"></i> YouTube
+                    </a>
+                    <a href="https://www.instagram.com/miracle_clas?igsh=MWt2cnQ3a2xidmU0aQ==" target="_blank" rel="noopener noreferrer"
+                        class="social-btn instagram" aria-label="Kunjungi Instagram Kelas TKJ 2">
+                        <i class="fab fa-instagram" aria-hidden="true"></i> Instagram
+                    </a>
+                </div>
+            </section>
+        </section>
+
+        <!-- Wali Kelas Section -->
+        <section class="section" id="wali-kelas">
+            <!-- Bagian Wali Kelas dengan Foto -->
+            <div class="wali-kelas-container">
+                <!-- Tombol Kembali ke Beranda -->
+                <div style="margin-bottom: 30px; padding-top: 0;">
+                    <button class="back-to-home-btn" onclick="navigateToSection('home')">
+                        <i class="fas fa-arrow-left"></i> Kembali ke Beranda
+                    </button>
+                </div>
+
+                <h2 class="wali-kelas-title">
+                    <i class="fas fa-chalkboard-teacher"></i> Profil Wali Kelas
+                </h2>
+
+                <div class="wali-grid">
+                    <div class="wali-card">
+                        <div class="wali-card-header">
+                            <div class="wali-photo">
+                                <img src="tkj2/bu ester.jpeg" alt="Bu Ester - Wali Kelas X TKJ 2" loading="lazy">
+                            </div>
+                            <h3>Bu Ester</h3>
+                            <div class="wali-nip"></div>
+                            <div class="wali-role-badge">Wali Kelas X TKJ 2</div>
+                        </div>
+                        <div class="wali-card-body">
+                            <div class="wali-info-item">
+                                <div class="label"><i class="fas fa-graduation-cap" aria-hidden="true"></i> </div>
+                                <div class="value"></div>
+                            </div>
+                            <div class="wali-info-item">
+                                <div class="label"><i class="fas fa-book-open" aria-hidden="true"></i> Mata Pelajaran</div>
+                                <div class="value">Ilmu Pengetahuan Alam & Sosial (IPAS)</div>
+                            </div>
+                            <div class="wali-info-item">
+                                <div class="label"><i class="fas fa-certificate" aria-hidden="true"></i> Gelar</div>
+                                <div class="value">Sarjana Pendidikan</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="wali-card">
+                        <div class="wali-card-header">
+                            <div class="wali-photo">
+                                <img src="tkj2/bu erin.jpeg" alt="Bu Erin - Wali Kelas XI TKJ 2" loading="lazy">
+                            </div>
+                            <h3>Bu Erin</h3>
+                            <div class="wali-nip"></div>
+                            <div class="wali-role-badge">Wali Kelas XI TKJ 2</div>
+                        </div>
+                        <div class="wali-card-body">
+                            <div class="wali-info-item">
+                                <div class="label"><i class="fas fa-graduation-cap" aria-hidden="true"></i></div>
+                                <div class="value"></div>
+                            </div>
+                            <div class="wali-info-item">
+                                <div class="label"><i class="fas fa-book-open" aria-hidden="true"></i> Mata Pelajaran</div>
+                                <div class="value">Pendidikan Kewarganegaraan (PKN)</div>
+                            </div>
+                            <div class="wali-info-item">
+                                <div class="label"><i class="fas fa-certificate" aria-hidden="true"></i> Gelar</div>
+                                <div class="value">Sarjana Pendidikan</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="wali-card">
+                        <div class="wali-card-header">
+                            <div class="wali-photo">
+                                <img src="tkj2/bu erin.jpeg" alt="Bu Erin - Wali Kelas XI TKJ 2" loading="lazy">
+                            </div>
+                            <h3>Bu Erin</h3>
+                            <div class="wali-nip"></div>
+                            <div class="wali-role-badge">Wali Kelas XI TKJ 2</div>
+                        </div>
+                        <div class="wali-card-body">
+                            <div class="wali-info-item">
+                                <div class="label"><i class="fas fa-graduation-cap" aria-hidden="true"></i></div>
+                                <div class="value"></div>
+                            </div>
+                            <div class="wali-info-item">
+                                <div class="label"><i class="fas fa-book-open" aria-hidden="true"></i> Mata Pelajaran</div>
+                                <div class="value">Pendidikan Kewarganegaraan (PKN)</div>
+                            </div>
+                            <div class="wali-info-item">
+                                <div class="label"><i class="fas fa-certificate" aria-hidden="true"></i> Gelar</div>
+                                <div class="value">Sarjana Pendidikan</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- All Students Section (40 siswa) - TANPA FILTER -->
+        <section class="section" id="all-students">
+            <div class="all-students-container">
+                <!-- Tombol Kembali ke Beranda -->
+                <div style="margin-bottom: 30px; padding-top: 0;">
+                    <button class="back-to-home-btn" onclick="navigateToSection('home')">
+                        <i class="fas fa-arrow-left"></i> Kembali ke Beranda
+                    </button>
+                </div>
+
+                <h2 style="text-align: center; margin-bottom: 30px; color: #2c3e50;">
+                    <i class="fas fa-users"></i> Daftar 40 Siswa Kelas XI TKJ 2
+                </h2>
+                <div class="student-info-header">
+                    <i class="fas fa-users"></i> 40 Siswa (27 Laki-laki, 13 Perempuan)
+                </div>
+                <div class="students-grid" id="studentsGrid"></div>
+            </div>
+        </section>
+
+        <!-- Student Profile Section (detail sederhana) -->
+        <section class="section" id="student-profile"></section>
+
+        <!-- Comments to Admin Section -->
+        <section class="section" id="comments">
+            <div class="comments-wrapper">
+                <div class="comments-container">
+                    <!-- Back to Home Button -->
+                    <div style="margin-bottom: 30px; padding-top: 0;">
+                        <button class="back-to-home-btn" onclick="navigateToSection('home')">
+                            <i class="fas fa-arrow-left"></i> Kembali ke Beranda
+                        </button>
+                    </div>
+
+                    <div class="comments-header">
+                        <h2><i class="fas fa-comments"></i>Komentar ke Admin</h2>
+                        <p>Pesan hanya tampil selama halaman ini terbuka. Saat dikirim, WhatsApp admin akan terbuka; komentar tidak disimpan atau ditampilkan untuk umum.</p>
+                    </div>
+
+                    <!-- Comments Display -->
+                    <div class="comments-display" id="commentsDisplay">
+                        <div class="no-comments-msg">
+                            <i class="fas fa-inbox"></i>
+                            <p>Belum ada komentar</p>
+                        </div>
+                    </div>
+
+                    <!-- Comment Form -->
+                    <form id="commentsForm" class="comments-form-simple">
+                        <label for="commentMessage" style="display: block; margin-bottom: 8px; font-weight: 500;">Pesan Anda:</label>
+                        <textarea id="commentMessage" name="commentMessage" class="form-textarea-simple"
+                            placeholder="Tulis pesan Anda di sini..." required aria-label="Pesan untuk admin"></textarea>
+                        <button type="submit" class="submit-btn-simple" aria-label="Kirim pesan ke admin melalui WhatsApp">
+                            <i class="fab fa-whatsapp" aria-hidden="true"></i> Kirim ke Admin
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Structure Section -->
+        <section class="section" id="structure">
+            <div class="structure-tree">
+                <!-- Tombol Kembali ke Beranda -->
+                <div style="margin-bottom: 30px; padding-top: 0;">
+                    <button class="back-to-home-btn" onclick="navigateToSection('home')">
+                        <i class="fas fa-arrow-left"></i> Kembali ke Beranda
+                    </button>
+                </div>
+
+                <h2 style="text-align: center; margin-bottom: 40px; color: #2c3e50;">
+                    <i class="fas fa-sitemap"></i> Struktur Kelas XI TKJ 2
+                </h2>
+                <!-- Top Level: Ketua & Wakil Ketua -->
+                <div class="tree-level top-level">
+                    <div class="tree-member ketua-member">
+                        <img src="tkj2/nuril.jpeg" alt="Muhammad Nuril Arifin - Ketua Kelas" loading="lazy" class="member-thumb">
+                        <div class="member-box ketua-box">
+                            <div class="member-position">Ketua Kelas</div>
+                            <div class="member-fullname">MUHAMMAD NURIL ARIFIN</div>
+                        </div>
+                    </div>
+
+                    <div class="tree-member wakil-member">
+                        <img src="tkj2/nasrul.jpeg" alt="Muhammad Nasrul Mukmin - Wakil Ketua" loading="lazy" class="member-thumb">
+                        <div class="member-box wakil-box">
+                            <div class="member-position">Wakil Ketua</div>
+                            <div class="member-fullname">MUHAMMAD NASRUL MUKMIN</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Connecting line between levels -->
+                <div class="tree-connector" aria-hidden="true">
+                    <div class="connector-line vertical"></div>
+                    <div class="connector-line horizontal"></div>
+                </div>
+
+                <!-- Middle Level: Sekretaris 1 & 2 -->
+                <div class="tree-level middle-level">
+                    <div class="tree-member sekretaris-member">
+                        <img src="tkj2/lusiana.jpeg" alt="Lusiana Aristianty K. D. - Sekretaris 1" loading="lazy" class="member-thumb">
+                        <div class="member-box sekretaris-box">
+                            <div class="member-position">Sekretaris 1</div>
+                            <div class="member-fullname">LUSIANA ARISTIANTY K. D.</div>
+                        </div>
+                    </div>
+
+                    <div class="tree-member sekretaris-member">
+                        <img src="tkj2/fito.jpeg" alt="Fito Azka Wiradana - Sekretaris 2" loading="lazy" class="member-thumb">
+                        <div class="member-box sekretaris-box">
+                            <div class="member-position">Sekretaris 2</div>
+                            <div class="member-fullname">FITO AZKA WIRADANA</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Connecting line between levels -->
+                <div class="tree-connector" aria-hidden="true">
+                    <div class="connector-line vertical"></div>
+                    <div class="connector-line horizontal"></div>
+                </div>
+
+                <!-- Bottom Level: Bendahara 1 & 2 -->
+                <div class="tree-level bottom-level">
+                    <div class="tree-member bendahara-member">
+                        <img src="tkj2/nafisha.jpeg" alt="Nafisha Salsabila W. - Bendahara 1" loading="lazy" class="member-thumb">
+                        <div class="member-box bendahara-box">
+                            <div class="member-position">Bendahara 1</div>
+                            <div class="member-fullname">NAFISHA SALSABILA W.</div>
+                        </div>
+                    </div>
+
+                    <div class="tree-member bendahara-member">
+                        <img src="tkj2/jonatan.jpeg" alt="Jonatan Kristian - Bendahara 2" loading="lazy" class="member-thumb">
+                        <div class="member-box bendahara-box">
+                            <div class="member-position">Bendahara 2</div>
+                            <div class="member-fullname">JONATAN KRISTIAN</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section class="section" id="gallery">
+            <div class="galeri-container">
+                <!-- Tombol Kembali ke Beranda -->
+                <div style="margin-bottom: 30px; padding-top: 0;">
+                    <button class="back-to-home-btn" onclick="navigateToSection('home')">
+                        <i class="fas fa-arrow-left"></i> Kembali ke Beranda
+                    </button>
+                </div>
+
+                <h2 class="galeri-title">
+                    <i class="fas fa-images"></i> Galeri Memori TKJ 2
+                    <button id="easterEggBtn"
+                        style="opacity: 0.12; font-size: 0.8rem; padding: 2px 6px; border: 1px solid transparent; background: none; cursor: pointer; color: #64748b; transition: opacity 0.3s; margin-left: 10px;"
+                        title="🥚">🥚</button>
+                </h2>
+
+                <div style="margin-bottom: 25px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                    <label for="gallerySearch" style="display: none;">Cari foto</label>
+                    <input type="text" id="gallerySearch"
+                        placeholder="🔍 Cari foto berdasarkan nomor atau kata kunci..."
+                        aria-label="Cari foto berdasarkan nomor atau kata kunci"
+                        style="flex: 1; min-width: 200px; padding: 12px 16px; border: 2px solid #000; border-radius: 8px; font-size: 0.95rem; background: white;" />
+                    <button id="clearSearchBtn"
+                        aria-label="Bersihkan hasil pencarian"
+                        style="padding: 10px 20px; background: white; border: 2px solid #000; border-radius: 8px; cursor: pointer; font-weight: 500; font-size: 0.95rem;">Bersihkan</button>
+                </div>
+
+                <div class="galeri-grid" id="galeriGrid">
+                    <!-- Item galeri akan diisi oleh JavaScript -->
+                </div>
+            </div>
+
+            <!-- Modal untuk menampilkan gambar full -->
+            <div id="imageModal" class="modal" role="dialog" aria-label="Tampilan galeri besar" aria-hidden="true">
+                <span class="close-modal" onclick="closeModal()" role="button" tabindex="0" aria-label="Tutup galeri">×</span>
+                <a class="modal-prev" onclick="changeImage(-1)" role="button" tabindex="0" aria-label="Gambar sebelumnya">&#10094;</a>
+                <a class="modal-next" onclick="changeImage(1)" role="button" tabindex="0" aria-label="Gambar berikutnya">&#10095;</a>
+                <div class="modal-loading" id="modalLoading" style="display: none;">
+                    <i class="fas fa-spinner" aria-hidden="true"></i>
+                </div>
+                <img class="modal-content" id="modalImage" alt="Galeri">
+                <div class="modal-caption" id="modalCaption"></div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- AI Chatbot Floating Button & Window -->
+    <button id="chatbotBtn" class="chatbot-btn" aria-label="Buka chatbot TKJ 2" aria-expanded="false" aria-controls="chatbotWindow" title="Chat dengan chatbot TKJ 2">
+        <svg class="chatbot-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+            <!-- Chat bubble main -->
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke-linecap="round" stroke-linejoin="round" />
+            <!-- Dots inside -->
+            <circle cx="8" cy="10" r="1" fill="currentColor" />
+            <circle cx="12" cy="10" r="1" fill="currentColor" />
+            <circle cx="16" cy="10" r="1" fill="currentColor" />
+        </svg>
+    </button>
+
+    <div id="chatbotWindow" class="chatbot-window" role="dialog" aria-label="Chatbot AI TKJ 2" aria-hidden="true">
+        <div class="chatbot-header">
+            <h3><i class="fas fa-robot" aria-hidden="true"></i> Chatbot TKJ 2</h3>
+            <div class="chatbot-header-btns">
+                <button id="clearChatBtn" title="Hapus History" aria-label="Hapus riwayat chat"><i class="fas fa-trash-alt" aria-hidden="true"></i></button>
+                <button id="closeChatBtn" aria-label="Tutup chatbot"><i class="fas fa-times" aria-hidden="true"></i></button>
+            </div>
+        </div>
+        <div class="chatbot-messages" id="chatbotMessages" role="log" aria-label="Pesan chatbot">
+            <div class="bot-msg">Halo! Saya RKJ2. Saya menjawab berdasarkan kumpulan respons yang sudah disiapkan, bukan AI online. Tanyakan hal seputar kelas, guru, atau praktikum.</div>
+        </div>
+        <div class="chatbot-input">
+            <label for="chatInput" style="display: none;">Pesan chatbot</label>
+            <input type="text" id="chatInput" placeholder="Ketik pertanyaan..." aria-label="Ketik pertanyaan untuk chatbot">
+            <button id="sendChatBtn" aria-label="Kirim pesan"><i class="fas fa-paper-plane" aria-hidden="true"></i></button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
