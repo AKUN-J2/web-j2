@@ -73,48 +73,48 @@ mobileThemeToggle?.addEventListener('click', () => {
     }, 360);
 });
 
-// 40 DATA SISWA (nama, tanggal lahir, telepon, alamat, instagram, gelar)
+// Data roster siswa
 const studentsData = [
-    { id: 1, name: "FOIRENT FEBRIANTY", gender: "perempuan", birthDate: "03 Februari 2009", phone: "-", address: "-", avatar: "tkj2/fio.jpeg", instagram: "-", gelar: "-" },
-    { id: 2, name: "FITO AZKA WIRADANA", gender: "laki-laki", birthDate: "09 April 2009", phone: "-", address: "-", avatar: "tkj2/fito.jpeg", instagram: "-", gelar: "-" },
-    { id: 3, name: "GALANG FERDIANTO", gender: "laki-laki", birthDate: "04 November 2008", phone: "-", address: "-", avatar: "tkj2/galfer.jpeg", instagram: "-", gelar: "-" },
-    { id: 4, name: "GALANG SAKTIAWAN", gender: "Laki-laki", birthDate: "22 Mei 2008", phone: "-", address: "-", avatar: "tkj2/galsak.jpeg", instagram: "-", gelar: "-" },
-    { id: 5, name: "GIANT EVO ARIANTO", gender: "Laki-laki", birthDate: "09 Desember 2008", phone: "-", address: "-", avatar: "tkj2/neo.jpeg", instagram: "-", gelar: "-" },
-    { id: 6, name: "HANIEFUL FEBRIANSAH", gender: "Laki-laki", birthDate: "16 Februari 2008", phone: "-", address: "-", avatar: "tkj2/hanip.jpeg", instagram: "-", gelar: "-" },
-    { id: 7, name: "HEFDZIL AKBAR", gender: "Laki-laki", birthDate: "12 juli 2009", phone: "-", address: "-", avatar: "tkj2/hefdzil.jpeg", instagram: "-", gelar: "-" },
-    { id: 8, name: "HELSA INDNAZIL ARSY", gender: "Perempuan", birthDate: "02 mei 2008", phone: "-", address: "-", avatar: "tkj2/helsa.jpeg", instagram: "-", gelar: "-" },
-    { id: 9, name: "IPAN MAULANA", gender: "Laki-laki", birthDate: "16 Oktober 2008", phone: "-", address: "-", avatar: "tkj2/ipan.jpeg", instagram: "-", gelar: "-" },
-    { id: 10, name: "JAY ADITYA MAHOTRA", gender: "Laki-laki", birthDate: "25 November 2008", phone: "-", address: "-", avatar: "tkj2/jay.jpeg", instagram: "-", gelar: "-" },
-    { id: 11, name: "JELITA KEYZA MAHARANI", gender: "Perempuan", birthDate: "04 Mei 2009", phone: "-", address: "- ", avatar: 'tkj2/jelita.jpeg', instagram: "-", gelar: "-" },
-    { id: 12, name: 'JESSICA ANASTASYA OKTAFIANA', gender: 'Perempuan', birthDate: '27 Oktober 2008', phone: '-', address: '-', avatar: 'tkj2/jesica.jpeg', instagram: '-', gelar: '-' },
-    { id: 13, name: 'JOKO SATRIO', gender: 'Laki-laki', birthDate: '25 Mei 2008', phone: '-', address: '-', avatar: 'tkj2/joko.jpeg', instagram: '-', gelar: '-' },
-    { id: 14, name: 'JONATAN KRISTIAN', gender: 'Laki-laki', birthDate: '18 Juli 2008', phone: '-', address: '-', avatar: 'tkj2/jonatan.jpeg', instagram: '-', gelar: '-' },
-    { id: 15, name: 'JOVAN CORNELY', gender: 'Laki-laki', birthDate: '15 Maret 2009', phone: '-', address: '-', avatar: 'tkj2/jovan.jpeg', instagram: '-', gelar: '-' },
-    { id: 16, name: "KEYRA AQEELA PUTRI NOVIA", gender: "Perempuan", birthDate: "25 Mei 2009", phone: "-", address: "- ", avatar: 'tkj2/keyra.jpeg', instagram: '-', gelar: '-' },
-    { id: 17, name: "KRISTIYA ANDARAKASIH", gender: "Perempuan", birthDate: "25 Agustus 2009", phone: "-", address: "-", avatar: "tkj2/kris.jpeg", instagram: '-', gelar: '-' },
-    { id: 18, name: "LEITO PRATAMA PUTRA", gender: "Laki-laki", birthDate: "18 Januari 2009", phone: "-", address: "-", avatar: "tkj2/leito.jpeg", instagram: '-', gelar: '-' },
-    { id: 19, name: "LUSIANA ARISTIANTY KUSUMA DEWI", gender: "Perempuan", birthDate: "05 Februari 2009", phone: "-", address: "-", avatar: "tkj2/lusiana.jpeg", instagram: '-', gelar: '-' },
-    { id: 20, name: "(#ALMARHUN#) M. ARIFIN ROZAK", gender: "Laki-laki", birthDate: "26 Juli 2008", phone: "-", address: "-", avatar: "tkj2/ripin.jpeg", instagram: '-', gelar: '-' },
-    { id: 21, name: "M. PARAMA MAHAPUTRA ROKHIM", gender: "Laki-laki", birthDate: "03 Februari 2009", phone: "-", address: "-", avatar: 'tkj2/parama.jpeg', instagram: '-', gelar: '-' },
-    { id: 22, name: "MANDA HARTIKA", gender: "Perempuan", birthDate: '10 Agustus 2008', phone: '-', address: '-', avatar: 'tkj2/manda.jpeg', instagram: '-', gelar: '-' },
-    { id: 23, name: 'MARGARET CANTIKA', gender: 'Perempuan', birthDate: '04 Agustus 2009', phone: '-', address: '-', avatar: 'tkj2/margaret.jpeg', instagram: '-', gelar: '-' },
-    { id: 24, name: 'MARVEL SETIA PERDANA', gender: 'Laki-laki', birthDate: '15 Maret 2008', phone: '-', address: '-', avatar: 'tkj2/marvel.jpeg', instagram: '-', gelar: '-' },
-    { id: 25, name: "MARVEL SURYA ATMAJA ", gender: 'Laki-laki', birthDate: '12 Maret 2009', phone: '-', address: '-', avatar: 'tkj2/mansur.jpeg', instagram: '-', gelar: '-' },
-    { id: 26, name: 'MELVIANA MILLYANA PUTRI ARIFTI', gender: 'Perempuan', birthDate: '24 Mei 2008', phone: '-', address: '-', avatar: 'tkj2/melvi.jpeg', instagram: '-', gelar: '-' },
-    { id: 27, name: "MOH. ILHAM AL-FARUQ", gender: "Laki-laki", birthDate: "06 November 2008", phone: "-", address: "-", avatar: "tkj2/faruq.jpeg", instagram: '-', gelar: '-' },
-    { id: 28, name: "MOH. NURIL ARIFIN", gender: "Laki-laki", birthDate: "22 Mei 2008", phone: "-", address: "-", avatar: "tkj2/nuril.jpeg", instagram: '-', gelar: '-' },
-    { id: 29, name: "MOHAMMAD KAKA ILHAM NUDIN", gender: "Laki-laki", birthDate: "10 Maret 2008", phone: "-", address: "-", avatar: "tkj2/kaka.jpeg", instagram: '-', gelar: '-' },
-    { id: 30, name: "MOHAMMAD FARDAN ZAKI ARIAN SAPUTRA", gender: "Laki-laki", birthDate: "05 Mei 2008", phone: "-", address: "-", avatar: "tkj2/fardan.jpeg", instagram: '-', gelar: '-' },
-    { id: 31, name: "MUH. RENDY SAPUTRA", gender: "Laki-laki", birthDate: "05 Januari 2008", phone: "-", address: "-", avatar: "tkj2/rendy.jpeg", instagram: '-', gelar: '-' },
-    { id: 32, name: "MUHAMMAD ILHAM ULINUHA FADIL", gender: "Laki-laki", birthDate: "14 Agustus 2008", phone: "-", address: "-", avatar: "tkj2/ulin.jpeg", instagram: '-', gelar: '-' },
-    { id: 33, name: "MUHAMMAD AGUS BAHTIAR", gender: "Laki-laki", birthDate: "16 Maret 2009", phone: "-", address: "-", avatar: "tkj2/agus.jpeg", instagram: '-', gelar: '-' },
-    { id: 34, name: "MUHAMMAD AKBAR MAULANA", gender: "Laki-laki", birthDate: "29 Desember 2008", phone: "-", address: "-", avatar: "tkj2/akbar.jpeg", instagram: '-', gelar: '-' },
-    { id: 35, name: "MUHAMMAD NASRUL MUKMIN", gender: "Laki-laki", birthDate: "3 Juli 2008", phone: "- ", address: '-', avatar: 'tkj2/nasrul.jpeg', instagram: '-', gelar: '-' },
-    { id: 36, name: 'MUHAMMAD ZAENAL', gender: 'Laki-laki', birthDate: '08 Agustus 2008', phone: '-', address: '-', avatar: 'tkj2/zaenal.jpeg', instagram: '-', gelar: '-' },
-    { id: 37, name: 'MUHAMMAD ZAKY IRJA NA\'IM', gender: 'Laki-laki', birthDate: '22 Februari 2009', phone: '-', address: '-', avatar: 'tkj2/zaky.jpeg', instagram: '-', gelar: '-' },
-    { id: 38, name: 'NADINE KEYSHA ALIVIA', gender: 'Perempuan', birthDate: '20 Oktober 2008', phone: '-', address: '-', avatar: 'tkj2/nadin.jpeg', instagram: '-', gelar: '-' },
-    { id: 39, name: 'NAFINSA RESIACA PUTRI', gender: 'Perempuan', birthDate: '14 Mei 2009', phone: '-', address: '-', avatar: 'tkj2/resi.jpeg', instagram: '-', gelar: '-' },
-    { id: 40, name: 'NAFISHA SALSABILA WAHYUNINGTYAS', gender: 'Perempuan', birthDate: '04 November 2008', phone: '-', address: '-', avatar: 'tkj2/nafisha.jpeg', instagram: '-', gelar: '-' }
+    { name: "FOIRENT FEBRIANTY", avatar: "tkj2/fio.jpeg" },
+    { name: "FITO AZKA WIRADANA", avatar: "tkj2/fito.jpeg" },
+    { name: "GALANG FERDIANTO", avatar: "tkj2/galfer.jpeg" },
+    { name: "GALANG SAKTIAWAN", avatar: "tkj2/galsak.jpeg" },
+    { name: "GIANT EVO ARIANTO", avatar: "tkj2/neo.jpeg" },
+    { name: "HANIEFUL FEBRIANSAH", avatar: "tkj2/hanip.jpeg" },
+    { name: "HEFDZIL AKBAR", avatar: "tkj2/hefdzil.jpeg" },
+    { name: "HELSA INDNAZIL ARSY", avatar: "tkj2/helsa.jpeg" },
+    { name: "IPAN MAULANA", avatar: "tkj2/ipan.jpeg" },
+    { name: "JAY ADITYA MAHOTRA", avatar: "tkj2/jay.jpeg" },
+    { name: "JELITA KEYZA MAHARANI", avatar: "tkj2/jelita.jpeg" },
+    { name: "JESSICA ANASTASYA OKTAFIANA", avatar: "tkj2/jesica.jpeg" },
+    { name: "JOKO SATRIO", avatar: "tkj2/joko.jpeg" },
+    { name: "JONATAN KRISTIAN", avatar: "tkj2/jonatan.jpeg" },
+    { name: "JOVAN CORNELY", avatar: "tkj2/jovan.jpeg" },
+    { name: "KEYRA AQEELA PUTRI NOVIA", avatar: "tkj2/keyra.jpeg" },
+    { name: "KRISTIYA ANDARAKASIH", avatar: "tkj2/kris.jpeg" },
+    { name: "LEITO PRATAMA PUTRA", avatar: "tkj2/leito.jpeg" },
+    { name: "LUSIANA ARISTIANTY KUSUMA DEWI", avatar: "tkj2/lusiana.jpeg" },
+    { name: "(#ALMARHUN#) M. ARIFIN ROZAK", avatar: "tkj2/ripin.jpeg" },
+    { name: "M. PARAMA MAHAPUTRA ROKHIM", avatar: "tkj2/parama.jpeg" },
+    { name: "MANDA HARTIKA", avatar: "tkj2/manda.jpeg" },
+    { name: "MARGARET CANTIKA", avatar: "tkj2/margaret.jpeg" },
+    { name: "MARVEL SETIA PERDANA", avatar: "tkj2/marvel.jpeg" },
+    { name: "MARVEL SURYA ATMAJA", avatar: "tkj2/mansur.jpeg" },
+    { name: "MELVIANA MILLYANA PUTRI ARIFTI", avatar: "tkj2/melvi.jpeg" },
+    { name: "MOH. ILHAM AL-FARUQ", avatar: "tkj2/faruq.jpeg" },
+    { name: "MOH. NURIL ARIFIN", avatar: "tkj2/nuril.jpeg" },
+    { name: "MOHAMMAD KAKA ILHAM NUDIN", avatar: "tkj2/kaka.jpeg" },
+    { name: "MOHAMMAD FARDAN ZAKI ARIAN SAPUTRA", avatar: "tkj2/fardan.jpeg" },
+    { name: "MUH. RENDY SAPUTRA", avatar: "tkj2/rendy.jpeg" },
+    { name: "MUHAMMAD ILHAM ULINUHA FADIL", avatar: "tkj2/ulin.jpeg" },
+    { name: "MUHAMMAD AGUS BAHTIAR", avatar: "tkj2/agus.jpeg" },
+    { name: "MUHAMMAD AKBAR MAULANA", avatar: "tkj2/akbar.jpeg" },
+    { name: "MUHAMMAD NASRUL MUKMIN", avatar: "tkj2/nasrul.jpeg" },
+    { name: "MUHAMMAD ZAENAL", avatar: "tkj2/zaenal.jpeg" },
+    { name: "MUHAMMAD ZAKY IRJA NA'IM", avatar: "tkj2/zaky.jpeg" },
+    { name: "NADINE KEYSHA ALIVIA", avatar: "tkj2/nadin.jpeg" },
+    { name: "NAFINSA RESIACA PUTRI", avatar: "tkj2/resi.jpeg" },
+    { name: "NAFISHA SALSABILA WAHYUNINGTYAS", avatar: "tkj2/nafisha.jpeg" }
 ];
 
 // Mobile menu
@@ -151,45 +151,19 @@ if (mobileMenuBtn && navLinks) {
     });
 }
 
-// Dropdown siswa
-const studentDropdown = document.getElementById('studentDropdown');
-function generateStudentDropdown() {
-    if (!studentDropdown) return;
-    studentDropdown.innerHTML = '';
-
-    const gridContainer = document.createElement('div');
-    gridContainer.className = 'dropdown-students-grid';
-
-    studentsData.forEach(s => {
-        const card = document.createElement('a');
-        card.className = 'dropdown-student-card';
-        card.href = `siswa.html?id=${s.id}`;
-        card.innerHTML = `
-            <img src="${s.avatar}" alt="${s.name}" class="avatar">
-            <div class="name">${s.name}</div>
-        `;
-        gridContainer.appendChild(card);
-    });
-
-    studentDropdown.appendChild(gridContainer);
-}
-generateStudentDropdown();
-
 const pageBySection = {
     home: 'index.html',
     'all-students': 'siswa.html',
-    'student-profile': 'siswa.html',
     'wali-kelas': 'wali-kelas.html',
     structure: 'struktur.html',
     gallery: 'galeri.html',
     comments: 'komentar.html'
 };
 
-function navigateToSection(sectionId, studentId = null) {
+function navigateToSection(sectionId) {
     const page = pageBySection[sectionId];
     if (!page) return;
-    const query = sectionId === 'student-profile' && studentId ? `?id=${studentId}` : '';
-    window.location.href = `${page}${query}`;
+    window.location.href = page;
 }
 
 window.navigateToSection = navigateToSection;
@@ -217,55 +191,31 @@ function loadAllStudents() {
     const grid = document.getElementById('studentsGrid');
     if (!grid) return;
     grid.innerHTML = '';
-    studentsData.forEach(s => {
-        const details = [
-            { icon: 'fa-birthday-cake', value: s.birthDate },
-            { icon: 'fa-phone', value: s.phone },
-            { icon: 'fa-map-marker-alt', value: s.address }
-        ].filter(detail => detail.value && detail.value.trim() !== '-');
-        const card = document.createElement('a');
+    studentsData.forEach(student => {
+        const card = document.createElement('article');
         card.className = 'student-card';
-        card.href = `siswa.html?id=${s.id}`;
-        card.innerHTML = `
-            <div class="student-card-header">
-                <div class="student-card-avatar"><img src="${s.avatar}" alt="Foto ${s.name}" loading="lazy"></div>
-                <h3>${s.name}</h3>
-            </div>
-            <div class="student-card-body">
-                ${details.map(detail => `<div class="student-card-detail-item"><i class="fas ${detail.icon}" aria-hidden="true"></i> ${detail.value}</div>`).join('')}
-            </div>
-        `;
+
+        const header = document.createElement('div');
+        header.className = 'student-card-header';
+
+        const avatarContainer = document.createElement('div');
+        avatarContainer.className = 'student-card-avatar';
+
+        const avatar = document.createElement('img');
+        avatar.src = student.avatar;
+        avatar.alt = `Foto ${student.name}`;
+        avatar.width = 128;
+        avatar.height = 128;
+        avatar.loading = 'lazy';
+        avatar.decoding = 'async';
+        avatarContainer.appendChild(avatar);
+
+        const name = document.createElement('h3');
+        name.textContent = student.name;
+        header.append(avatarContainer, name);
+        card.appendChild(header);
         grid.appendChild(card);
     });
-}
-
-function loadStudentProfile(id) {
-    const student = studentsData.find(item => item.id == id);
-    if (!student) return;
-    const profile = document.getElementById('student-profile');
-    if (!profile) return;
-    const details = [
-        { icon: 'fa-birthday-cake', label: 'Tanggal Lahir', value: student.birthDate },
-        { icon: 'fa-phone', label: 'Telepon', value: student.phone },
-        { icon: 'fa-map-marker-alt', label: 'Alamat', value: student.address },
-        { icon: 'fa-medal', label: 'Gelar Kelas', value: student.gelar }
-    ].filter(detail => detail.value && detail.value.trim() !== '-');
-    const instagramLink = student.instagram !== '-' ? `<a href="https://instagram.com/${student.instagram}" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; background: #f09433; color: white; border-radius: 20px; text-decoration: none; font-weight: 500; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 20px rgba(240, 148, 51, 0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';"><i class="fab fa-instagram"></i> Instagram</a>` : '';
-    profile.innerHTML = `
-        <div class="student-container">
-            <div class="student-header">
-                <div class="student-avatar"><img src="${student.avatar}" alt="Foto ${student.name}"></div>
-                <div class="student-info">
-                    <h2>${student.name}</h2>
-                </div>
-            </div>
-            <div class="student-details-simple">
-                ${details.map(detail => `<div class="detail-row"><i class="fas ${detail.icon}" aria-hidden="true"></i><span class="label">${detail.label}</span><span class="value">${detail.value}</span></div>`).join('')}
-            </div>
-            ${student.instagram !== '-' ? `<div class="profile-social-row">${instagramLink}</div>` : ''}
-            <div class="profile-back-row"><a href="siswa.html" class="filter-btn profile-back-link"><i class="fas fa-arrow-left" aria-hidden="true"></i> Kembali ke daftar siswa</a></div>
-        </div>
-    `;
 }
 
 // ===== GALLERY MODAL FUNCTIONS =====
@@ -455,19 +405,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const studentsGrid = document.getElementById('studentsGrid');
-    const studentProfile = document.getElementById('student-profile');
-    const studentListPage = document.getElementById('all-students');
-    const studentId = new URLSearchParams(window.location.search).get('id');
-
     if (currentPage === 'siswa.html' && studentsGrid) loadAllStudents();
-    if (currentPage === 'siswa.html' && studentProfile && studentId) {
-        if (studentListPage) {
-            studentListPage.hidden = true;
-            studentListPage.classList.remove('active');
-        }
-        studentProfile.classList.add('active');
-        loadStudentProfile(studentId);
-    }
 
     if (currentPage === 'galeri.html' && document.getElementById('galeriGrid')) loadGallery();
 
