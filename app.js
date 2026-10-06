@@ -222,9 +222,15 @@ function loadAllStudents() {
 const totalGalleryImages = 174;
 const galleryData = [];
 const galleryAlbumPhotos = {
-    class10: [], // Nomor tambahan jika caption foto tidak menyebut kelas 10
-    class11: Array.from({ length: 10 }, (_, index) => index + 1), // Momen Pondok Ramadan
-    class12: [] // Nomor tambahan jika caption foto tidak menyebut kelas 12
+    class10: [],
+    class11: [],
+    class12: [],
+    random: []
+};
+const classGalleryPhotoNumbers = {
+    class10: [],
+    class11: [],
+    class12: []
 };
 const galleryCaptions = {
    
@@ -242,15 +248,7 @@ function getGalleryCaption(photoNumber) {
 
 function getGalleryAlbumPhotoNumbers(albumKey) {
     if (albumKey === 'random') return randomizedGalleryPhotoNumbers;
-
-    const classNumber = albumKey.replace('class', '');
-    const classRomanNumerals = { 10: 'x', 11: 'xi', 12: 'xii' };
-    const classPattern = new RegExp(`\\bkelas\\s*(?:${classNumber}|${classRomanNumerals[classNumber]})\\b`, 'i');
-    const captionMatches = galleryData.flatMap((item, index) =>
-        !item.isEasterEgg && classPattern.test(item.caption) ? [index + 1] : []
-    );
-
-    return [...new Set([...(galleryAlbumPhotos[albumKey] || []), ...captionMatches])].sort((a, b) => a - b);
+    return galleryAlbumPhotos[albumKey] || [];
 }
 
 for (let i = 1; i <= totalGalleryImages; i++) {
@@ -262,21 +260,71 @@ for (let i = 1; i <= totalGalleryImages; i++) {
     });
 }
 
-galleryData.push({
-    src: 'tkj2/egg.jpeg',
-    fullSrc: 'tkj2/egg.jpeg',
-    caption: 'Selamat, kamu menemukan item rahasia!',
-    icon: 'fa-egg',
-    isEasterEgg: true
-});
-
 let activeGalleryAlbum = 'random';
-let randomizedGalleryPhotoNumbers = Array.from({ length: totalGalleryImages }, (_, index) => index + 1);
-for (let index = randomizedGalleryPhotoNumbers.length - 1; index > 0; index--) {
-    const randomIndex = Math.floor(Math.random() * (index + 1));
-    [randomizedGalleryPhotoNumbers[index], randomizedGalleryPhotoNumbers[randomIndex]] =
-        [randomizedGalleryPhotoNumbers[randomIndex], randomizedGalleryPhotoNumbers[index]];
+let randomizedGalleryPhotoNumbers = [];
+
+async function loadGalleryFolderPhotos() {
+    const folders = [
+        { albumKey: 'class10', path: 'gambar/kls 10' },
+        { albumKey: 'class11', path: 'gambar/kls 11' },
+        { albumKey: 'class12', path: 'gambar/kls 12' },
+        { albumKey: 'random', path: 'gambar/random' }
+    ];
+
+    const folderPhotos = await Promise.all(folders.map(async folder => {
+        try {
+            const response = await fetch(`${folder.path}/`);
+            if (!response.ok) return { ...folder, photoNumbers: [] };
+
+            const directory = new DOMParser().parseFromString(await response.text(), 'text/html');
+            const photoNumbers = [...directory.querySelectorAll('a')]
+                .map(link => link.textContent.trim().match(/^(\d+)\.jpeg$/i))
+                .filter(Boolean)
+                .map(match => Number(match[1]))
+                .sort((first, second) => first - second);
+
+            return { ...folder, photoNumbers };
+        } catch (error) {
+            console.error(`Tidak dapat membaca folder ${folder.path}`, error);
+            return { ...folder, photoNumbers: [] };
+        }
+    }));
+
+    folderPhotos.forEach(({ albumKey, path, photoNumbers }) => {
+        const classNumber = albumKey.replace('class', '');
+        if (albumKey !== 'random') classGalleryPhotoNumbers[albumKey].push(...photoNumbers);
+
+        photoNumbers.forEach(photoNumber => {
+            const imagePath = `${path}/${photoNumber}.jpeg`;
+            galleryData.push({
+                src: imagePath,
+                fullSrc: imagePath,
+                caption: albumKey === 'random'
+                    ? `Foto ${photoNumber} - Galeri TKJ 2`
+                    : `Foto ${photoNumber} - Kelas ${classNumber}`,
+                icon: 'fa-images'
+            });
+            galleryAlbumPhotos[albumKey].push(galleryData.length);
+        });
+    });
+
+    randomizedGalleryPhotoNumbers = [...galleryAlbumPhotos.random];
+    for (let index = randomizedGalleryPhotoNumbers.length - 1; index > 0; index--) {
+        const randomIndex = Math.floor(Math.random() * (index + 1));
+        [randomizedGalleryPhotoNumbers[index], randomizedGalleryPhotoNumbers[randomIndex]] =
+            [randomizedGalleryPhotoNumbers[randomIndex], randomizedGalleryPhotoNumbers[index]];
+    }
+
+    galleryData.push({
+        src: 'tkj2/egg.jpeg',
+        fullSrc: 'tkj2/egg.jpeg',
+        caption: 'Selamat, kamu menemukan item rahasia!',
+        icon: 'fa-egg',
+        isEasterEgg: true
+    });
 }
+
+const galleryFoldersReady = loadGalleryFolderPhotos();
 
 let currentImageIndex = 0;
 const modal = document.getElementById('imageModal');
@@ -364,11 +412,14 @@ function showImage() {
 }
 
 function changeImage(direction) {
-    currentImageIndex += direction;
-    if (currentImageIndex >= galleryData.length) {
-        currentImageIndex = 0;
-    } else if (currentImageIndex < 0) {
-        currentImageIndex = galleryData.length - 1;
+    const albumPhotoNumbers = getGalleryAlbumPhotoNumbers(activeGalleryAlbum);
+    const currentAlbumPosition = albumPhotoNumbers.indexOf(currentImageIndex + 1);
+
+    if (currentAlbumPosition !== -1) {
+        const nextAlbumPosition = (currentAlbumPosition + direction + albumPhotoNumbers.length) % albumPhotoNumbers.length;
+        currentImageIndex = albumPhotoNumbers[nextAlbumPosition] - 1;
+    } else {
+        currentImageIndex = (currentImageIndex + direction + galleryData.length) % galleryData.length;
     }
     showImage();
 }
@@ -387,21 +438,26 @@ if (modal) {
 }
 
 // ===== GALLERY, COMMENTS, AND CHATBOT INTERACTIONS =====
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+    await galleryFoldersReady;
+
     const homeFeatureImage = document.querySelector('#home .memory-feature img');
     if (currentPage === 'index.html' && homeFeatureImage) {
-        const totalPhotos = 174;
         const photoStorageKey = 'tkj2-last-home-photo';
-        let photoNumber = Math.floor(Math.random() * totalPhotos) + 1;
-        const previousPhoto = Number(sessionStorage.getItem(photoStorageKey));
+        const classPhotos = Object.entries(classGalleryPhotoNumbers).flatMap(([albumKey, photoNumbers]) =>
+            photoNumbers.map(photoNumber => ({ albumKey, photoNumber }))
+        );
 
-        if (photoNumber === previousPhoto) {
-            photoNumber = (photoNumber % totalPhotos) + 1;
+        if (classPhotos.length > 0) {
+            const previousPhoto = sessionStorage.getItem(photoStorageKey);
+            const availablePhotos = classPhotos.filter(photo => `${photo.albumKey}/${photo.photoNumber}` !== previousPhoto);
+            const selectedPhoto = availablePhotos[Math.floor(Math.random() * availablePhotos.length)] || classPhotos[0];
+            const classNumber = selectedPhoto.albumKey.replace('class', '');
+
+            sessionStorage.setItem(photoStorageKey, `${selectedPhoto.albumKey}/${selectedPhoto.photoNumber}`);
+            homeFeatureImage.src = `gambar/kls ${classNumber}/${selectedPhoto.photoNumber}.jpeg`;
+            homeFeatureImage.alt = `Foto kenangan TKJ 2 kelas ${classNumber} nomor ${selectedPhoto.photoNumber}`;
         }
-
-        sessionStorage.setItem(photoStorageKey, String(photoNumber));
-        homeFeatureImage.src = `gambar/${photoNumber}.jpeg`;
-        homeFeatureImage.alt = `Foto kenangan TKJ 2 nomor ${photoNumber}`;
     }
 
     const studentsGrid = document.getElementById('studentsGrid');
