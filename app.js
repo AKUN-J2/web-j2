@@ -264,49 +264,45 @@ let activeGalleryAlbum = 'random';
 let randomizedGalleryPhotoNumbers = [];
 
 async function loadGalleryFolderPhotos() {
-    const folders = [
-        { albumKey: 'class10', path: 'gambar/kls 10' },
-        { albumKey: 'class11', path: 'gambar/kls 11' },
-        { albumKey: 'class12', path: 'gambar/kls 12' },
-        { albumKey: 'random', path: 'gambar/random' }
-    ];
+    const folders = {
+        class10: 'gambar/kls 10',
+        class11: 'gambar/kls 11',
+        class12: 'gambar/kls 12',
+        random: 'gambar/random'
+    };
 
-    const folderPhotos = await Promise.all(folders.map(async folder => {
-        try {
-            const response = await fetch(`${folder.path}/`);
-            if (!response.ok) return { ...folder, photoNumbers: [] };
+    try {
+        const response = await fetch('gallery-manifest.json', { cache: 'no-cache' });
+        if (!response.ok) throw new Error(`Manifest request failed: ${response.status}`);
 
-            const directory = new DOMParser().parseFromString(await response.text(), 'text/html');
-            const photoNumbers = [...directory.querySelectorAll('a')]
-                .map(link => link.textContent.trim().match(/^(\d+)\.jpeg$/i))
-                .filter(Boolean)
-                .map(match => Number(match[1]))
-                .sort((first, second) => first - second);
+        const manifest = await response.json();
+        Object.entries(folders).forEach(([albumKey, path]) => {
+            const classNumber = albumKey.replace('class', '');
+            const photoFiles = (Array.isArray(manifest[albumKey]) ? manifest[albumKey] : [])
+                .filter(fileName => typeof fileName === 'string' && /^\d+\.jpeg$/i.test(fileName))
+                .sort((first, second) => Number.parseInt(first, 10) - Number.parseInt(second, 10));
 
-            return { ...folder, photoNumbers };
-        } catch (error) {
-            console.error(`Tidak dapat membaca folder ${folder.path}`, error);
-            return { ...folder, photoNumbers: [] };
-        }
-    }));
+            if (albumKey !== 'random') {
+                classGalleryPhotoNumbers[albumKey].push(...photoFiles.map(fileName => Number.parseInt(fileName, 10)));
+            }
 
-    folderPhotos.forEach(({ albumKey, path, photoNumbers }) => {
-        const classNumber = albumKey.replace('class', '');
-        if (albumKey !== 'random') classGalleryPhotoNumbers[albumKey].push(...photoNumbers);
-
-        photoNumbers.forEach(photoNumber => {
-            const imagePath = `${path}/${photoNumber}.jpeg`;
-            galleryData.push({
-                src: imagePath,
-                fullSrc: imagePath,
-                caption: albumKey === 'random'
-                    ? `Foto ${photoNumber} - Galeri TKJ 2`
-                    : `Foto ${photoNumber} - Kelas ${classNumber}`,
-                icon: 'fa-images'
+            photoFiles.forEach(fileName => {
+                const photoNumber = Number.parseInt(fileName, 10);
+                const imagePath = `${path}/${fileName}`;
+                galleryData.push({
+                    src: imagePath,
+                    fullSrc: imagePath,
+                    caption: albumKey === 'random'
+                        ? `Foto ${photoNumber} - Galeri TKJ 2`
+                        : `Foto ${photoNumber} - Kelas ${classNumber}`,
+                    icon: 'fa-images'
+                });
+                galleryAlbumPhotos[albumKey].push(galleryData.length);
             });
-            galleryAlbumPhotos[albumKey].push(galleryData.length);
         });
-    });
+    } catch (error) {
+        console.error('Tidak dapat memuat gallery-manifest.json', error);
+    }
 
     randomizedGalleryPhotoNumbers = [...galleryAlbumPhotos.random];
     for (let index = randomizedGalleryPhotoNumbers.length - 1; index > 0; index--) {
