@@ -22,8 +22,36 @@
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <script>
+        try {
+            document.documentElement.classList.add(
+                sessionStorage.getItem('tkj2-intro-seen') === 'true' ? 'intro-seen' : 'intro-active'
+            );
+        } catch (error) {
+            document.documentElement.classList.add('intro-active');
+        }
+    </script>
 </head>
 <body>
+    <section class="welcome-screen" id="welcomeScreen" aria-labelledby="welcomeTitle" aria-modal="true" role="dialog">
+        <img class="welcome-image is-visible" src="gambar/kls 10/1.jpeg" alt="" fetchpriority="high">
+        <img class="welcome-image" src="gambar/kls 10/78.jpeg" alt="" loading="eager">
+        <div class="welcome-shade" aria-hidden="true"></div>
+        <div class="welcome-content">
+            <p class="welcome-kicker">ARSIP KENANGAN · KELAS XI TKJ 2</p>
+            <h1 id="welcomeTitle" class="welcome-title">
+                <span class="welcome-line">Di antara tugas dan tawa,</span>
+                <span class="welcome-line">ada hari-hari yang terasa biasa.</span>
+                <span class="welcome-line">Tapi bersama, semuanya jadi cerita.</span>
+            </h1>
+            <p class="welcome-signature">Sebuah perjalanan, satu kelas, banyak kenangan.</p>
+            <button class="welcome-enter" id="welcomeEnter" type="button">
+                Masuk ke Beranda <i class="fas fa-arrow-right" aria-hidden="true"></i>
+            </button>
+        </div>
+        <span class="welcome-index" aria-hidden="true">TKJ 2 <span> / </span> 2024—2027</span>
+    </section>
+
     <!-- Navbar -->
     <nav class="navbar" aria-label="Navigasi utama">
         <div class="nav-container">

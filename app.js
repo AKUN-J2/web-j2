@@ -9,6 +9,86 @@ function updateClock() {
 updateClock();
 setInterval(updateClock, 1000);
 
+// ===== HOMEPAGE WELCOME SCREEN =====
+const welcomeScreen = document.getElementById('welcomeScreen');
+const welcomeEnter = document.getElementById('welcomeEnter');
+
+if (welcomeScreen && welcomeEnter && document.documentElement.classList.contains('intro-active')) {
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const welcomePhotos = welcomeScreen.querySelectorAll('.welcome-image');
+    const welcomeTitle = welcomeScreen.querySelector('.welcome-title');
+    const welcomeLines = [...welcomeScreen.querySelectorAll('.welcome-line')];
+    const welcomeLineCopy = welcomeLines.map(line => line.textContent);
+    let activePhotoIndex = 0;
+    let welcomeTypingTimer;
+    welcomeScreen.style.setProperty('--welcome-backdrop', `url("${welcomePhotos[activePhotoIndex].src}")`);
+    const welcomePhotoTimer = window.setInterval(() => {
+        welcomePhotos[activePhotoIndex]?.classList.remove('is-visible');
+        activePhotoIndex = (activePhotoIndex + 1) % welcomePhotos.length;
+        welcomePhotos[activePhotoIndex]?.classList.add('is-visible');
+        welcomeScreen.style.setProperty('--welcome-backdrop', `url("${welcomePhotos[activePhotoIndex].src}")`);
+    }, 4000);
+
+    welcomeTitle.setAttribute('aria-label', welcomeLineCopy.join(' '));
+    welcomeLines.forEach(line => {
+        line.setAttribute('aria-hidden', 'true');
+        line.textContent = '';
+    });
+
+    if (reducedMotion) {
+        welcomeLines.forEach((line, index) => {
+            line.textContent = welcomeLineCopy[index];
+        });
+        welcomeScreen.classList.add('is-ready');
+    } else {
+        let lineIndex = 0;
+        let characterIndex = 0;
+
+        const typeNextCharacter = () => {
+            const line = welcomeLines[lineIndex];
+            const character = welcomeLineCopy[lineIndex][characterIndex++];
+            line.classList.add('is-typing');
+            line.textContent += character;
+
+            if (characterIndex >= welcomeLineCopy[lineIndex].length) {
+                line.classList.remove('is-typing');
+                lineIndex++;
+                characterIndex = 0;
+
+                if (lineIndex >= welcomeLines.length) {
+                    welcomeScreen.classList.add('is-ready');
+                    return;
+                }
+
+                welcomeTypingTimer = window.setTimeout(typeNextCharacter, 360);
+                return;
+            }
+
+            const pause = /[,.]/.test(character) ? 300 : character === ' ' ? 90 : 75 + Math.random() * 55;
+            welcomeTypingTimer = window.setTimeout(typeNextCharacter, pause);
+        };
+
+        typeNextCharacter();
+    }
+
+    welcomeEnter.addEventListener('click', () => {
+        window.clearInterval(welcomePhotoTimer);
+        window.clearTimeout(welcomeTypingTimer);
+        try {
+            sessionStorage.setItem('tkj2-intro-seen', 'true');
+        } catch (error) {
+            // The intro still closes when browser storage is unavailable.
+        }
+
+        welcomeScreen.classList.add('is-exiting');
+        window.setTimeout(() => {
+            document.documentElement.classList.remove('intro-active');
+            document.documentElement.classList.add('intro-seen');
+            welcomeScreen.remove();
+        }, reducedMotion ? 0 : 700);
+    });
+}
+
 // ===== CUSTOM THEME SWITCHER =====
 let currentTheme = localStorage.getItem('tkj2-theme') || 'default';
 
