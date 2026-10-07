@@ -73,6 +73,37 @@ mobileThemeToggle?.addEventListener('click', () => {
     }, 360);
 });
 
+function animateHomeIntro() {
+    const introCopy = document.querySelector('#home .memory-intro-copy');
+    if (!introCopy || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const fullText = introCopy.textContent.trim();
+    const accessibleText = document.createElement('span');
+    accessibleText.className = 'typing-sr-only';
+    accessibleText.textContent = fullText;
+
+    const typingText = document.createElement('span');
+    typingText.className = 'typing-copy is-typing';
+    typingText.setAttribute('aria-hidden', 'true');
+    introCopy.replaceChildren(accessibleText, typingText);
+
+    let characterIndex = 0;
+    const typeNextCharacter = () => {
+        if (characterIndex >= fullText.length) {
+            typingText.classList.remove('is-typing');
+            return;
+        }
+
+        const character = fullText[characterIndex++];
+        typingText.textContent += character;
+        window.setTimeout(typeNextCharacter, /[.,:;]/.test(character) ? 150 : 22);
+    };
+
+    typeNextCharacter();
+}
+
+animateHomeIntro();
+
 // Data roster siswa
 const studentsData = [
     { name: "FOIRENT FEBRIANTY", avatar: "tkj2/fio.jpeg" },
