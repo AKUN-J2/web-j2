@@ -332,6 +332,24 @@ function loadAllStudents() {
 // ===== GALLERY MODAL FUNCTIONS =====
 const totalGalleryImages = 174;
 const galleryData = [];
+const optimizedGalleryThumbnailSources = new Set([
+    'gambar/kls 10/68.jpeg',
+    'gambar/kls 10/69.jpeg',
+    'gambar/kls 10/70.jpeg',
+    'gambar/kls 10/78.jpeg',
+    'gambar/kls 11/57.jpeg',
+    'gambar/kls 11/75.jpeg',
+    'gambar/kls 11/78.jpeg',
+    'gambar/random/8.jpeg',
+    'gambar/random/9.jpeg'
+]);
+
+function getGalleryThumbnailSource(source) {
+    return optimizedGalleryThumbnailSources.has(source)
+        ? source.replace(/^gambar\//, 'gambar/optimized/')
+        : source;
+}
+
 const galleryAlbumPhotos = {
     class10: [],
     class11: [],
@@ -383,10 +401,14 @@ async function loadGalleryFolderPhotos() {
     };
 
     try {
-        const response = await fetch('gallery-manifest.json', { cache: 'no-cache' });
-        if (!response.ok) throw new Error(`Manifest request failed: ${response.status}`);
+        let manifest = window.galleryManifest;
 
-        const manifest = await response.json();
+        if (!manifest) {
+            const response = await fetch('gallery-manifest.json', { cache: 'no-cache' });
+            if (!response.ok) throw new Error(`Manifest request failed: ${response.status}`);
+            manifest = await response.json();
+        }
+
         Object.entries(folders).forEach(([albumKey, path]) => {
             const classNumber = albumKey.replace('class', '');
             const photoFiles = (Array.isArray(manifest[albumKey]) ? manifest[albumKey] : [])
@@ -460,7 +482,7 @@ function loadGallery(filterText = '') {
         galleryItem.className = 'galeri-item';
         galleryItem.onclick = () => openModal(itemNumber - 1);
         galleryItem.innerHTML = `
-            <img src="${item.src}" alt="${item.caption}" loading="lazy">
+            <img src="${getGalleryThumbnailSource(item.src)}" alt="${item.caption}" loading="lazy">
             <div class="galeri-overlay"><i class="fas fa-search-plus"></i></div>
             <div class="galeri-caption"><i class="fas ${item.icon}"></i> ${item.caption}</div>
         `;
