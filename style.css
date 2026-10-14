@@ -5316,6 +5316,21 @@ html[data-color-mode="dark"] .mobile-theme-toggle {
     border-color: var(--memory-line);
 }
 
+@media (min-width: 993px) {
+    html[data-color-mode="dark"] .navbar .nav-links,
+    html[data-color-mode="dark"] .navbar .nav-links a,
+    html[data-color-mode="dark"] .navbar .nav-links a:hover,
+    html[data-color-mode="dark"] .navbar .nav-links a.active,
+    html[data-color-mode="dark"] .navbar .nav-links a[aria-current="page"] {
+        background: transparent;
+    }
+
+    html[data-color-mode="dark"] .navbar .nav-links a.active,
+    html[data-color-mode="dark"] .navbar .nav-links a[aria-current="page"] {
+        box-shadow: inset 0 -2px 0 var(--primary-light);
+    }
+}
+
 html[data-color-mode="dark"] .memory-intro h1,
 html[data-color-mode="dark"] .memory-section-title,
 html[data-color-mode="dark"] .section:not(#home) h1,
@@ -5631,7 +5646,7 @@ html.color-mode-transitioning :where(h1, h2, h3, p, a, span, label) {
 }
 
 #gallery .galeri-container {
-    background-color: #efe2cc;
+    background-color: var(--bg-primary);
     background-image:
         repeating-linear-gradient(0deg, transparent 0 25px, rgba(88, 65, 43, 0.035) 25px 26px),
         repeating-linear-gradient(90deg, transparent 0 31px, rgba(255, 255, 255, 0.16) 31px 32px);
@@ -5772,4 +5787,53 @@ html.color-mode-transitioning :where(h1, h2, h3, p, a, span, label) {
     #gallery .galeri-grid { column-gap: 11px; }
     #gallery .galeri-item,
     #gallery .galeri-item:nth-child(n) { margin-bottom: 15px; padding: 6px 6px 0; }
+}
+
+html[data-color-mode="dark"] #gallery .galeri-container {
+    color: var(--text-primary);
+    background-color: var(--bg-primary);
+    background-image: none;
+}
+
+html[data-color-mode="dark"] #gallery.section.active .galeri-title,
+html[data-color-mode="dark"] #gallery.section.active .galeri-title i {
+    color: var(--text-primary);
+}
+
+html[data-color-mode="dark"] #gallery .galeri-item,
+html[data-color-mode="dark"] #gallery .galeri-item:hover {
+    color: #49382c;
+    background: #fffdf8;
+    border-color: rgba(111, 87, 63, 0.24);
+}
+
+html[data-color-mode="dark"] #gallerySearch,
+html[data-color-mode="dark"] #clearSearchBtn {
+    color: var(--text-primary) !important;
+    background: var(--bg-secondary) !important;
+    border-color: var(--memory-line) !important;
+}
+
+html[data-color-mode="dark"] #gallerySearch::placeholder {
+    color: var(--text-secondary);
+}
+
+html[data-color-mode="dark"] #gallery .gallery-albums button {
+    color: var(--text-primary);
+    background: var(--bg-secondary);
+    border-color: var(--memory-line);
+}
+
+html[data-color-mode="dark"] #gallery .gallery-albums button i {
+    color: var(--primary-light);
+}
+
+html[data-color-mode="dark"] #gallery .gallery-albums button[aria-pressed="true"] {
+    color: #fff9ef;
+    background: #713d43;
+    border-color: #512a30;
+}
+
+html[data-color-mode="dark"] #gallery .gallery-albums button[aria-pressed="true"] i {
+    color: #fff9ef;
 }
