@@ -340,8 +340,7 @@ const optimizedGalleryThumbnailSources = new Set([
     'gambar/kls 11/57.jpeg',
     'gambar/kls 11/75.jpeg',
     'gambar/kls 11/78.jpeg',
-    'gambar/random/8.jpeg',
-    'gambar/random/9.jpeg'
+    'gambar/random/8.jpeg'
 ]);
 
 function getGalleryThumbnailSource(source) {
