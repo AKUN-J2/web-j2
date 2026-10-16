@@ -152,16 +152,10 @@ html.intro-seen .welcome-screen {
     font: inherit;
     font-weight: 700;
     cursor: pointer;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(8px);
-    transition: opacity 350ms ease, transform 350ms ease, background-color 200ms ease;
-}
-
-.welcome-screen.is-ready .welcome-enter {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
+    transition: opacity 350ms ease, transform 350ms ease, background-color 200ms ease;
 }
 
 .welcome-enter:hover {
@@ -2361,6 +2355,8 @@ header p {
 }
 
 .galeri-item {
+    font: inherit;
+    text-align: left;
     background: white;
     border-radius: 8px;
     overflow: hidden;

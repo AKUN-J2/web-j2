@@ -303,7 +303,7 @@
 
                     <div class="comments-header">
                         <h2><i class="fas fa-comments"></i>Komentar ke Admin</h2>
-                        <p>Pesan hanya tampil selama halaman ini terbuka. Saat dikirim, WhatsApp admin akan terbuka; komentar tidak disimpan atau ditampilkan untuk umum.</p>
+                        <p>Pesan hanya tampil selama halaman ini terbuka. Saat dikirim, Gmail admin akan terbuka; komentar tidak disimpan atau ditampilkan untuk umum.</p>
                     </div>
 
                     <!-- Comments Display -->
@@ -319,8 +319,8 @@
                         <label for="commentMessage" style="display: block; margin-bottom: 8px; font-weight: 500;">Pesan Anda:</label>
                         <textarea id="commentMessage" name="commentMessage" class="form-textarea-simple"
                             placeholder="Tulis pesan Anda di sini..." required aria-label="Pesan untuk admin"></textarea>
-                        <button type="submit" class="submit-btn-simple" aria-label="Kirim pesan ke admin melalui WhatsApp">
-                            <i class="fab fa-whatsapp" aria-hidden="true"></i> Kirim ke Admin
+                        <button type="submit" class="submit-btn-simple" aria-label="Kirim pesan ke admin melalui Gmail">
+                            <i class="fas fa-envelope" aria-hidden="true"></i> Kirim via Gmail
                         </button>
                     </form>
                 </div>
@@ -446,9 +446,9 @@
 
             <!-- Modal untuk menampilkan gambar full -->
             <div id="imageModal" class="modal" role="dialog" aria-label="Tampilan galeri besar" aria-hidden="true">
-                <span class="close-modal" onclick="closeModal()" role="button" tabindex="0" aria-label="Tutup galeri">×</span>
-                <a class="modal-prev" onclick="changeImage(-1)" role="button" tabindex="0" aria-label="Gambar sebelumnya">&#10094;</a>
-                <a class="modal-next" onclick="changeImage(1)" role="button" tabindex="0" aria-label="Gambar berikutnya">&#10095;</a>
+                <button class="close-modal" type="button" onclick="closeModal()" aria-label="Tutup galeri">×</button>
+                <button class="modal-prev" type="button" onclick="changeImage(-1)" aria-label="Gambar sebelumnya">&#10094;</button>
+                <button class="modal-next" type="button" onclick="changeImage(1)" aria-label="Gambar berikutnya">&#10095;</button>
                 <div class="modal-loading" id="modalLoading" style="display: none;">
                     <i class="fas fa-spinner" aria-hidden="true"></i>
                 </div>

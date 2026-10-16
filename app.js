@@ -21,6 +21,15 @@ if (welcomeScreen && welcomeEnter && document.documentElement.classList.contains
     const welcomeLineCopy = welcomeLines.map(line => line.textContent);
     let activePhotoIndex = 0;
     let welcomeTypingTimer;
+
+    welcomeEnter.focus();
+    welcomeScreen.addEventListener('keydown', event => {
+        if (event.key !== 'Tab') return;
+
+        event.preventDefault();
+        welcomeEnter.focus();
+    });
+
     welcomeScreen.style.setProperty('--welcome-backdrop', `url("${welcomePhotos[activePhotoIndex].src}")`);
     const welcomePhotoTimer = window.setInterval(() => {
         welcomePhotos[activePhotoIndex]?.classList.remove('is-visible');
@@ -332,19 +341,9 @@ function loadAllStudents() {
 // ===== GALLERY MODAL FUNCTIONS =====
 const totalGalleryImages = 174;
 const galleryData = [];
-const optimizedGalleryThumbnailSources = new Set([
-    'gambar/kls 10/68.jpeg',
-    'gambar/kls 10/69.jpeg',
-    'gambar/kls 10/70.jpeg',
-    'gambar/kls 10/78.jpeg',
-    'gambar/kls 11/57.jpeg',
-    'gambar/kls 11/75.jpeg',
-    'gambar/kls 11/78.jpeg',
-    'gambar/random/8.jpeg'
-]);
 
 function getGalleryThumbnailSource(source) {
-    return optimizedGalleryThumbnailSources.has(source)
+    return source.startsWith('gambar/')
         ? source.replace(/^gambar\//, 'gambar/optimized/')
         : source;
 }
@@ -459,6 +458,8 @@ const modal = document.getElementById('imageModal');
 const modalImg = document.getElementById('modalImage');
 const modalCaption = document.getElementById('modalCaption');
 const modalLoading = document.getElementById('modalLoading');
+const modalCloseButton = modal?.querySelector('.close-modal');
+let lastFocusedGalleryTrigger = null;
 
 function loadGallery(filterText = '') {
     const grid = document.getElementById('galeriGrid');
@@ -477,12 +478,14 @@ function loadGallery(filterText = '') {
 
         if (!shouldDisplay) return;
 
-        const galleryItem = document.createElement('div');
+        const galleryItem = document.createElement('button');
+        galleryItem.type = 'button';
         galleryItem.className = 'galeri-item';
+        galleryItem.setAttribute('aria-label', `Lihat ${item.caption}`);
         galleryItem.onclick = () => openModal(itemNumber - 1);
         galleryItem.innerHTML = `
-            <img src="${getGalleryThumbnailSource(item.src)}" alt="${item.caption}" loading="lazy">
-            <div class="galeri-overlay"><i class="fas fa-search-plus"></i></div>
+            <img src="${getGalleryThumbnailSource(item.src)}" alt="${item.caption}" loading="lazy" decoding="async">
+            <div class="galeri-overlay"><i class="fas fa-search-plus" aria-hidden="true"></i></div>
             <div class="galeri-caption"><i class="fas ${item.icon}"></i> ${item.caption}</div>
         `;
         grid.appendChild(galleryItem);
@@ -493,12 +496,14 @@ function loadGallery(filterText = '') {
         const egg = galleryData.find(item => item.isEasterEgg);
         if (egg) {
             const eggIndex = galleryData.indexOf(egg);
-            const galleryItem = document.createElement('div');
+            const galleryItem = document.createElement('button');
+            galleryItem.type = 'button';
             galleryItem.className = 'galeri-item';
+            galleryItem.setAttribute('aria-label', `Lihat ${egg.caption}`);
             galleryItem.onclick = () => openModal(eggIndex);
             galleryItem.innerHTML = `
-                <img src="${egg.src}" alt="${egg.caption}" loading="lazy">
-                <div class="galeri-overlay"><i class="fas fa-search-plus"></i></div>
+                <img src="${getGalleryThumbnailSource(egg.src)}" alt="${egg.caption}" loading="lazy" decoding="async">
+                <div class="galeri-overlay"><i class="fas fa-search-plus" aria-hidden="true"></i></div>
                 <div class="galeri-caption"><i class="fas ${egg.icon}"></i> ${egg.caption}</div>
             `;
             grid.appendChild(galleryItem);
@@ -515,13 +520,26 @@ function loadGallery(filterText = '') {
 }
 
 function openModal(index) {
+    if (!modal) return;
+
+    lastFocusedGalleryTrigger = document.activeElement;
     currentImageIndex = index;
     modal.style.display = 'block';
+    modal.setAttribute('aria-hidden', 'false');
+    modal.setAttribute('aria-modal', 'true');
+    modalCloseButton?.focus();
     showImage();
 }
 
 function closeModal() {
+    if (!modal) return;
+
     modal.style.display = 'none';
+    modal.setAttribute('aria-hidden', 'true');
+    modal.removeAttribute('aria-modal');
+    if (lastFocusedGalleryTrigger instanceof HTMLElement && lastFocusedGalleryTrigger.isConnected) {
+        lastFocusedGalleryTrigger.focus();
+    }
 }
 
 function showImage() {
@@ -554,7 +572,19 @@ function changeImage(direction) {
 
 document.addEventListener('keydown', event => {
     if (!modal || modal.style.display !== 'block') return;
-    if (event.key === 'ArrowLeft') changeImage(-1);
+    if (event.key === 'Tab') {
+        const focusableElements = [...modal.querySelectorAll('button:not([disabled])')];
+        const firstElement = focusableElements[0];
+        const lastElement = focusableElements[focusableElements.length - 1];
+
+        if (event.shiftKey && document.activeElement === firstElement) {
+            event.preventDefault();
+            lastElement.focus();
+        } else if (!event.shiftKey && document.activeElement === lastElement) {
+            event.preventDefault();
+            firstElement.focus();
+        }
+    } else if (event.key === 'ArrowLeft') changeImage(-1);
     else if (event.key === 'ArrowRight') changeImage(1);
     else if (event.key === 'Escape') closeModal();
 });
@@ -633,7 +663,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     // ===== COMMENTS TO ADMIN FEATURE =====
     const commentsForm = document.getElementById('commentsForm');
     const commentsDisplay = document.getElementById('commentsDisplay');
-    const adminWhatsApp = '+6285336860656';
+    const adminEmail = 'kuna26010@gmail.com';
     let commentsHistory = [];
 
     function renderComments() {
@@ -686,9 +716,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             commentsHistory.push({ text: commentMessage, time: timeString });
             renderComments();
 
-            const encodedMessage = encodeURIComponent(commentMessage);
-            const whatsappUrl = `https://wa.me/${adminWhatsApp}?text=${encodedMessage}`;
-            window.open(whatsappUrl, '_blank');
+            const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(adminEmail)}&su=${encodeURIComponent('Komentar untuk Admin')}&body=${encodeURIComponent(commentMessage)}`;
+            window.open(gmailUrl, '_blank', 'noopener,noreferrer');
             commentsForm.reset();
         });
     }
