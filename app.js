@@ -374,6 +374,9 @@ function getGalleryCaption(photoNumber) {
 };
 
 function getGalleryAlbumPhotoNumbers(albumKey) {
+    if (albumKey === 'all') {
+        return ['class10', 'class11', 'class12', 'random'].flatMap(key => galleryAlbumPhotos[key]);
+    }
     if (albumKey === 'random') return randomizedGalleryPhotoNumbers;
     return galleryAlbumPhotos[albumKey] || [];
 }
@@ -387,7 +390,7 @@ for (let i = 1; i <= totalGalleryImages; i++) {
     });
 }
 
-let activeGalleryAlbum = 'random';
+let activeGalleryAlbum = 'all';
 let randomizedGalleryPhotoNumbers = [];
 
 async function loadGalleryFolderPhotos() {
