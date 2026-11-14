@@ -5861,3 +5861,101 @@ html[data-color-mode="dark"] #gallery .gallery-albums button[aria-pressed="true"
 html[data-color-mode="dark"] #gallery .gallery-albums button[aria-pressed="true"] i {
     color: #fff9ef;
 }
+
+#gallery .gallery-filter {
+    margin-bottom: 14px;
+}
+
+#gallery .gallery-filter-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+#gallery .gallery-filter-heading .galeri-title {
+    margin: 0;
+}
+
+#gallery .gallery-filter-toggle {
+    display: inline-flex;
+    width: 40px;
+    height: 40px;
+    flex: 0 0 40px;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+    background: var(--bg-secondary);
+    border: 1px solid var(--memory-line);
+    border-radius: 9px;
+    box-shadow: 0 2px 6px rgba(32, 40, 36, 0.08);
+    font: inherit;
+    cursor: pointer;
+    transition: color 180ms ease, background-color 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+#gallery .gallery-filter-toggle:hover,
+#gallery .gallery-filter.is-open .gallery-filter-toggle {
+    color: var(--primary-color);
+    border-color: var(--primary-light);
+    box-shadow: 0 3px 9px rgba(32, 40, 36, 0.12);
+}
+
+#gallery .gallery-filter-toggle:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 3px;
+}
+
+#gallery .gallery-filter-panel {
+    display: grid;
+    grid-template-rows: 0fr;
+    margin-top: 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-4px);
+    transition: grid-template-rows 220ms ease, margin-top 220ms ease, opacity 180ms ease, transform 220ms ease, visibility 0s linear 220ms;
+}
+
+#gallery .gallery-filter-panel-inner {
+    min-height: 0;
+    overflow: hidden;
+}
+
+#gallery .gallery-filter.is-open .gallery-filter-panel {
+    grid-template-rows: 1fr;
+    margin-top: 12px;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    transition-delay: 0s;
+}
+
+#gallery .gallery-filter-panel .gallery-albums {
+    display: flex;
+    width: fit-content;
+    max-width: 100%;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0;
+    overflow: visible;
+}
+
+#gallery .gallery-filter-panel .gallery-albums button {
+    border-radius: 999px;
+}
+
+@media (max-width: 680px) {
+    #gallery .gallery-filter-panel .gallery-albums {
+        display: grid;
+        width: 100%;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 7px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #gallery .gallery-filter-panel,
+    #gallery .gallery-filter-toggle {
+        transition-duration: 0.01ms;
+    }
+}

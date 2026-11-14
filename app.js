@@ -491,6 +491,12 @@ function loadGallery(filterText = '') {
             <div class="galeri-overlay"><i class="fas fa-search-plus" aria-hidden="true"></i></div>
             <div class="galeri-caption"><i class="fas ${item.icon}"></i> ${item.caption}</div>
         `;
+        const thumbnail = galleryItem.querySelector('img');
+        if (thumbnail && thumbnail.src !== new URL(item.src, document.baseURI).href) {
+            thumbnail.addEventListener('error', () => {
+                thumbnail.src = item.src;
+            }, { once: true });
+        }
         grid.appendChild(galleryItem);
         displayedCount++;
     });
@@ -640,6 +646,40 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (currentPage === 'galeri.html' && document.getElementById('galeriGrid')) loadGallery();
 
     const albumTabs = document.querySelectorAll('[data-gallery-album]');
+    const galleryFilter = document.getElementById('galleryFilter');
+    const galleryFilterToggle = document.getElementById('galleryFilterToggle');
+    const galleryFilterPanel = document.getElementById('galleryFilterPanel');
+
+    function setGalleryFilterOpen(isOpen, restoreFocus = false) {
+        if (!galleryFilter || !galleryFilterToggle || !galleryFilterPanel) return;
+
+        galleryFilter.classList.toggle('is-open', isOpen);
+        galleryFilterToggle.setAttribute('aria-expanded', String(isOpen));
+        galleryFilterToggle.setAttribute('aria-label', isOpen ? 'Tutup filter kategori' : 'Buka filter kategori');
+        galleryFilterToggle.title = isOpen ? 'Tutup filter kategori' : 'Buka filter kategori';
+        galleryFilterPanel.setAttribute('aria-hidden', String(!isOpen));
+
+        if (restoreFocus) galleryFilterToggle.focus();
+    }
+
+    if (galleryFilter && galleryFilterToggle) {
+        galleryFilterToggle.addEventListener('click', () => {
+            setGalleryFilterOpen(!galleryFilter.classList.contains('is-open'));
+        });
+
+        document.addEventListener('click', event => {
+            if (galleryFilter.classList.contains('is-open') && !galleryFilter.contains(event.target)) {
+                setGalleryFilterOpen(false);
+            }
+        });
+
+        document.addEventListener('keydown', event => {
+            if (event.key === 'Escape' && galleryFilter.classList.contains('is-open')) {
+                setGalleryFilterOpen(false, true);
+            }
+        });
+    }
+
     albumTabs.forEach(tab => {
         tab.addEventListener('click', () => {
             activeGalleryAlbum = tab.dataset.galleryAlbum;
@@ -647,6 +687,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             const searchInput = document.getElementById('gallerySearch');
             if (searchInput) searchInput.value = '';
             loadGallery();
+            setGalleryFilterOpen(false, true);
         });
     });
 

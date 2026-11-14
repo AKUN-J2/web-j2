@@ -23,4 +23,7 @@ foreach ($entry in $folders.GetEnumerator()) {
 $outputPath = Join-Path $PSScriptRoot 'gallery-manifest.json'
 $json = ConvertTo-Json -InputObject $manifest -Depth 3
 [System.IO.File]::WriteAllText($outputPath, $json + [Environment]::NewLine, [System.Text.UTF8Encoding]::new($false))
-Write-Output "Generated $outputPath"
+$scriptPath = Join-Path $PSScriptRoot 'gallery-manifest.js'
+$script = "window.galleryManifest = $json;"
+[System.IO.File]::WriteAllText($scriptPath, $script + [Environment]::NewLine, [System.Text.UTF8Encoding]::new($false))
+Write-Output "Generated $outputPath and $scriptPath"
