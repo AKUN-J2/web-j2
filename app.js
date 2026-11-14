@@ -551,11 +551,24 @@ function showImage() {
     modalImg.style.display = 'none';
 
     const image = new Image();
+    const thumbnailSource = getGalleryThumbnailSource(item.src);
+    let thumbnailFallbackAttempted = false;
+
     image.onload = function () {
         modalLoading.style.display = 'none';
         modalImg.style.display = 'block';
         modalImg.src = this.src;
         modalCaption.innerHTML = `<i class="fas ${item.icon}"></i> ${item.caption}`;
+    };
+    image.onerror = function () {
+        if (!thumbnailFallbackAttempted && thumbnailSource !== item.fullSrc) {
+            thumbnailFallbackAttempted = true;
+            image.src = thumbnailSource;
+            return;
+        }
+
+        modalLoading.style.display = 'none';
+        modalCaption.textContent = 'Foto tidak dapat dimuat.';
     };
     image.src = item.fullSrc;
 }
